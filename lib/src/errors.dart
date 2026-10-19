@@ -826,6 +826,15 @@ class LinkError extends IssueType {
       'KHR_MATERIALS_VARIANTS_NON_UNIQUE_VARIANT',
       (args) => 'This variant is used more than once for this mesh primitive.');
 
+  static final LinkError mpegAccessorTimedBufferReferenceMissmatch = LinkError._(
+      'MPEG_ACCESSOR_TIMED_BUFFER_REFERENCE_MISSMATCH',
+      (args) => "The MPEG_accessor_timed extension bufferView doesn't point to"
+        'the same buffer as accessor/${args[0]} bufferView.');
+
+  static final LinkError mpegAccessorTimedMissingBufferView = LinkError._(
+      'MPEG_ACCESSOR_TIMED_MISSING_BUFFERVIEW',
+      (args) => 'bufferView must be defined on MPEG_accessor_timed if not'
+          'defined on the base accessor.');
   LinkError._(String type, ErrorFunction message,
       [Severity severity = Severity.Error])
       : super(type, message, severity);

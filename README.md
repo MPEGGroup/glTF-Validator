@@ -52,6 +52,12 @@ NuGet package [Third-party contribution]: https://www.nuget.org/packages/GltfVal
   - KHR_materials_volume
   - KHR_mesh_quantization
   - KHR_texture_transform
+  - MPEG_media
+  - MPEG_accessor_timed
+  - MPEG_buffer_circular
+  - MPEG_texture_video
+  - MPEG_primitive_V3C
+  - MPEG_sampler_YCbCr
 - [Full list of detectable issues](ISSUES.md).
 
 ## Usage
@@ -157,6 +163,34 @@ To generate [ISSUES.md](ISSUES.md), follow these steps after installation:
 
 1. Run `dart run grinder issues`.
 2. `ISSUES.md` file will be written to the repo root.
+
+## MPEG Extension Tests
+
+The MPEG extensions are registered by default for the CLI and library. Their classes and registration descriptors are exported through `package:gltf/gltf.dart`; internal property-name constants remain in their extension libraries.
+
+Run the new extension tests from the repository root:
+
+```sh
+dart test test/ext/MPEG_texture_video/mpeg_texture_video_test.dart
+dart test test/ext/MPEG_sampler_ycbcr/mpeg_sampler_ycbcr_test.dart
+dart test test/ext/MPEG_primitive_v3c/mpeg_primitive_v3c_test.dart
+```
+
+- `MPEG_texture_video`: dimensions, format defaults, malformed properties, and accessor reference resolution.
+- `MPEG_sampler_YCbCr`: enum ranges, four-component swizzles, repeated swizzles, and malformed input handling.
+- `MPEG_primitive_V3C`: nested atlas and attribute objects, required properties, and accessor/texture references with JSON error paths.
+
+These suites exercise default registration through normal asset parsing. The earlier buffer-circular and timed-accessor suites register their extensions explicitly:
+
+```sh
+dart test test/ext/MPEG_buffer_circular test/ext/MPEG_accessor_timed
+dart test test/ext/MPEG_texture_video test/ext/MPEG_sampler_ycbcr test/ext/MPEG_primitive_v3c
+dart test
+```
+
+The new checks validate JSON properties and references; they do not decode video or V3C bitstreams. Video format validation currently covers the RGB, BGR, individual color-channel, and depth formats in `MPEG_TEXTURE_VIDEO_FORMATS`. YCbCr pixel formats and layout compatibility are not validated yet.
+
+Known failure: the buffer-circular test `normal asset parsing reports unresolved media` exposes an existing parser issue: buffer extensions are not linked automatically. Its explicit-link tests verify the reference checks separately.
 
 ## Contributing
 

@@ -36,6 +36,12 @@ import 'package:gltf/src/ext/KHR_materials_volume/khr_materials_volume.dart';
 import 'package:gltf/src/ext/KHR_mesh_quantization/khr_mesh_quantization.dart';
 import 'package:gltf/src/ext/KHR_node_visibility/khr_node_visibility.dart';
 import 'package:gltf/src/ext/KHR_texture_transform/khr_texture_transform.dart';
+import 'package:gltf/src/ext/MPEG_accessor_timed/mpeg_accessor_timed.dart';
+import 'package:gltf/src/ext/MPEG_buffer_circular/mpeg_buffer_circular.dart';
+import 'package:gltf/src/ext/MPEG_media/mpeg_media.dart';
+import 'package:gltf/src/ext/MPEG_primitive_v3c/mpeg_primitive_v3c.dart';
+import 'package:gltf/src/ext/MPEG_sampler_ycbcr/mpeg_sampler_ycbcr.dart';
+import 'package:gltf/src/ext/MPEG_texture_video/mpeg_texture_video.dart';
 import 'package:gltf/src/hash.dart';
 import 'package:meta/meta.dart';
 
@@ -59,6 +65,31 @@ export 'package:gltf/src/ext/KHR_materials_volume/khr_materials_volume.dart';
 export 'package:gltf/src/ext/KHR_mesh_quantization/khr_mesh_quantization.dart';
 export 'package:gltf/src/ext/KHR_node_visibility/khr_node_visibility.dart';
 export 'package:gltf/src/ext/KHR_texture_transform/khr_texture_transform.dart';
+export 'package:gltf/src/ext/MPEG_accessor_timed/mpeg_accessor_timed.dart'
+    show MPEGAccessorTimed, mpegTimedAccessorExtension;
+export 'package:gltf/src/ext/MPEG_buffer_circular/mpeg_buffer_circular.dart'
+    show MPEGBufferCircular, mpegBufferCircularExtension;
+export 'package:gltf/src/ext/MPEG_media/mpeg_media.dart'
+    show
+        MPEGMediaObject,
+        MPEGMedia,
+        MPEGMediaAlternatives,
+        MPEGMediaAlternativesTracks,
+        mpegMediaExtension;
+export 'package:gltf/src/ext/MPEG_primitive_v3c/mpeg_primitive_v3c.dart'
+    show MPEGPrimitiveV3C, V3C_AD, V3C_AVD, V3C_CAD, mpegPrimitiveV3CExtension;
+export 'package:gltf/src/ext/MPEG_sampler_ycbcr/mpeg_sampler_ycbcr.dart'
+    show
+        MPEGSamplerYCbCr,
+        Components,
+        YCbCrModel,
+        YCbCrRange,
+        ChromaLocation,
+        ComponentSwizzle,
+        Filter,
+        mpegSamplerYCbCrExtension;
+export 'package:gltf/src/ext/MPEG_texture_video/mpeg_texture_video.dart'
+    show MPEGTextureVideo, mpegTextureVideoExtension;
 
 class Extension {
   const Extension(this.name, this.functions,
@@ -123,5 +154,11 @@ const List<Extension> kDefaultExtensions = <Extension>[
   khrMaterialsVolumeExtension,
   khrMeshQuantizationExtension,
   khrNodeVisibilityExtension,
-  khrTextureTransformExtension
+  khrTextureTransformExtension,
+  mpegMediaExtension,
+  mpegBufferCircularExtension,
+  mpegTimedAccessorExtension,
+  mpegTextureVideoExtension,
+  mpegSamplerYCbCrExtension,
+  mpegPrimitiveV3CExtension
 ];
